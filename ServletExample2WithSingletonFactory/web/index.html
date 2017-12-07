@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Index of Functionality</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body>
+        <div>
+            <a href="FrontController?action=viewCustomers">View customer list</a>
+            
+            
+            
+            <p>Form to update customers (Using servlet)</p>
+            <form action="FrontController" method="post">
+                <table>
+                    <tr>
+                        <td> Customer name  : </td><td> <input name="customerName" size=30 type="text" /> </td> 
+                    </tr>
+                    <tr>
+                        <td> Increase amount  : </td><td> <input name="amount" size=15 type="text" /> </td> 
+                    </tr>
+                </table>
+                <input type="submit" value="Update" />
+                <!-- Include a hidden field to identify what the user wants to do -->
+                <input type="hidden" name ="action" value="update" />
+            </form>
+        </div>
+    </body>
+</html>
