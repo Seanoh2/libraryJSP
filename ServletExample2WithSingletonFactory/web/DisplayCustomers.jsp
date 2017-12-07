@@ -19,6 +19,7 @@
             // If there is a customer list to use in the session (and it's not empty)
             // Carrying out this check avoids the page breaking when the session times out
             
+            //Hi im tom
             if (customers != null && !customers.isEmpty())
             {
         %>
