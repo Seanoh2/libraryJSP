@@ -61,9 +61,16 @@ public class CommandFactory {
                     break;
                     
                 case "novelByAuthor":
-                    command = new NovelByNameCommand();
+                    command = new NovelByAuthorCommand();
                     break;
-                                   
+                    
+                case "viewborrowedtitle":
+                    command = new ViewBorrowedTitlesCommand();
+                    break;
+                    
+                case "logout":
+                    command = new LogoutUserCommand();
+                    break;
                 default:
                     command = new NoValidActionCommand();
                     break;
