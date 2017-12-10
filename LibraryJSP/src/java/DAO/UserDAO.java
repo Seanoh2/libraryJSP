@@ -94,6 +94,7 @@ public class UserDAO extends DAO implements UserDAOInterface {
      * @return ArrayList with users from the database with a name containing the
      * name parameter
      */
+    @Override
     public ArrayList<User> selectUserContainingName(String name) {
         Connection conn = null;
         PreparedStatement ps = null;
@@ -151,6 +152,7 @@ public class UserDAO extends DAO implements UserDAOInterface {
      * this parameter
      * @return User object which matches the ID of the param
      */
+    @Override
     public User findUserByID(int userID) {
         Connection conn = null;
         PreparedStatement ps = null;
@@ -192,7 +194,6 @@ public class UserDAO extends DAO implements UserDAOInterface {
      * This method will take input from the console and create a user object.
      *
      * @param u
-     * @param user
      * @return boolean indicating if the add was executed or not.
      */
     @Override

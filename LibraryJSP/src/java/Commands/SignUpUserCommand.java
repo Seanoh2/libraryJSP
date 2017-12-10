@@ -31,7 +31,7 @@ public class SignUpUserCommand implements Command {
         String country = request.getParameter("country");
         String addressLine1 = request.getParameter("addressLine1");
         String addressLine2 = request.getParameter("addressLine2");
-        int isAdmin = Integer.parseInt(request.getParameter("isAdmin"));
+        int isAdmin = 0; //Users cannot be signed up as admin, must be promoted ny an existing admin.
         User u = new User(email, password, firstName, lastName, country, addressLine1, addressLine2, isAdmin);
 
         User result = userDao.getUserByEmail(email);
