@@ -10,13 +10,12 @@
     <head>
         <%@ include file="header.jsp" %>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <title>My Home</title>
     </head>
     <body>
-        <% if(session.getAttribute("user") != null) { %>
-            
+        <%@ include file="viewTitles.jsp" %>
+        <% if (session.getAttribute("user") != null) { %>
         <h1>Logged in!</h1>
-        
-         <% } %>
+        <% }%>
     </body>
 </html>

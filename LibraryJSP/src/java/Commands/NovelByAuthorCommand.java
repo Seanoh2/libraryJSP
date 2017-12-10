@@ -23,20 +23,26 @@ public class NovelByAuthorCommand implements Command {
         String forwardToJsp = "";
         TitleDAO titleDao = new TitleDAO("librarydatabase");
         HttpSession session = request.getSession();
-        String titleRequest = session.getAttribute("titleRequest").toString();
-        
-        ArrayList<Title> title = titleDao.searchByAuthor("titleRequest");
-                    //If resonse isn't empty it is displayed to the user.
-                    if (title != null) {
-                        session.setAttribute("displayTitles", title);
-                        forwardToJsp = "myHome.jsp";
-                    } else {
-                        String errorMessage = "No Titles found with author.";
-                        session.setAttribute("errorMessage", errorMessage);
-                        forwardToJsp = "error.jsp";
-                    }
-                    
+        String titleRequest = (String) request.getParameter("titleRequest");
+
+        if (titleRequest != null) {
+            ArrayList<Title> titles = titleDao.searchByAuthor("titleRequest");
+            //If resonse isn't empty it is displayed to the user.
+            if (titles != null) {
+                session.setAttribute("results", titles);
+                forwardToJsp = "myHome.jsp";
+            } else {
+                String errorMessage = "No Titles found with author.";
+                session.setAttribute("errorMessage", errorMessage);
+                forwardToJsp = "error.jsp";
+            }
+        } else {
+            String errorMessage = "Error with Author request.";
+            session.setAttribute("errorMessage", errorMessage);
+            forwardToJsp = "error.jsp";
+        }
+
         return forwardToJsp;
     }
-    
+
 }

@@ -10,21 +10,26 @@
 <%@page import="DAO.TitleDAO"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%TitleDAO titleDao = new TitleDAO("librarydatabase");%>
-<%ArrayList<Title> titles = titleDao.viewAllTitles();%>
+<% ArrayList<Title> results;
+    if (session.getAttribute("results") == null) {
+        results = titleDao.viewAllTitles();
+    } else {
+        results = (ArrayList<Title>) session.getAttribute("results");
+    }%>
 <% User currentUser = (User) session.getAttribute("user"); %>
 <html>
     <body>     
-<div name="viewTitles">
-    <% for (Title t : titles) {%>   
-    <a href="titleInfo.jsp?titleID=<%=t.getTitleID()%>"><%=t.getNovelName()%></a>
-        <%if (currentUser != null) { %>
-        <button type="button" onclick="location.href = 'borrowTitle.jsp?titleID=<%t.getTitleID();%>';">Borrow</button>
-            <% if (currentUser.getIsAdmin() == 1) { %>
-                <button type="button" onclick="location.href = 'deleteTitle.jsp?titleID=<%t.getTitleID();%>';">Delete</button> 
+        <div name="viewTitles">
+            <% for (Title t : results) {%>   
+            <a href="titleInfo.jsp?titleID=<%=t.getTitleID()%>"><%=t.getNovelName()%></a>
+
+            <% if (currentUser != null && currentUser.getIsAdmin() == 1) { %>
+            <button type="button" onclick="location.href = 'deleteTitle.jsp?titleID=<%=t.getTitleID()%>';">Delete</button> 
             <% } %>
-        <% } %>
-    <br> 
-    <% }%>
-</div>
+            <br> 
+            <% }
+                session.removeAttribute("results");
+            %>
+        </div>
     </body>
 </html>

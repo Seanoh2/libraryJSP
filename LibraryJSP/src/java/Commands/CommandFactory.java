@@ -60,6 +60,10 @@ public class CommandFactory {
                     command = new NovelByNameCommand();
                     break;
                     
+                case "novelByID":
+                    command = new NovelByIDCommand();
+                    break;
+                    
                 case "novelByAuthor":
                     command = new NovelByAuthorCommand();
                     break;

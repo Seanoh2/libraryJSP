@@ -54,7 +54,7 @@ public interface TitleDAOInterface {
      * @param novelName is the what the user searched for
      * @return Title
      */
-    public Title searchByNovelName(String novelName);
+    public ArrayList<Title> searchByNovelName(String novelName);
     
     /**
      * users can search a title by id 

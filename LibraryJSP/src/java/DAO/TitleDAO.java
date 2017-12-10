@@ -280,21 +280,25 @@ public class TitleDAO extends DAO implements TitleDAOInterface {
      * be returned Query is used to show all titles with the name entered
      */
     @Override
-    public Title searchByNovelName(String novelName) {
+    public ArrayList<Title> searchByNovelName(String novelName) {
 
         Connection con = null;
         PreparedStatement ps = null;
         ResultSet rs = null;
         Title t = null;
+        ArrayList<Title> titles = new ArrayList();
+        String prepareSearch = "%" + novelName + "%";
+        
         try {
             con = getConnection();
 
-            String query = "Select * from titles where novelName = ?";
+            String query = "SELECT * FROM titles WHERE novelName LIKE ?";
             ps = con.prepareStatement(query);
-            ps.setString(1, novelName);
+            ps.setString(1, prepareSearch);
             rs = ps.executeQuery();
-            if (rs.next()) {
-                t = new Title(rs.getInt("titleID"), rs.getString("novelName"), rs.getString("author"), rs.getInt("stock"), rs.getInt("onLoan"), rs.getString("titleDescription"));
+            while (rs.next()) {
+                Title c = new Title(rs.getInt("titleID"), rs.getString("novelName"), rs.getString("author"), rs.getInt("stock"), rs.getInt("onLoan"), rs.getString("titleDescription"));
+                titles.add(c);
             }
         } catch (SQLException e) {
             System.out.println("Exception occured in the searchByNovelName() method: " + e.getMessage());
@@ -313,7 +317,7 @@ public class TitleDAO extends DAO implements TitleDAOInterface {
                 System.out.println("Exception occured in the finally section of the searchByNovelName() method: " + e.getMessage());
             }
         }
-        return t;
+        return titles;
 
     }
 
