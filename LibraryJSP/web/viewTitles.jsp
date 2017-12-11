@@ -17,8 +17,6 @@
         results = (ArrayList<Title>) session.getAttribute("results");
     }%>
 <% User currentUser = (User) session.getAttribute("user"); %>
-<html>
-    <body>     
         <div name="viewTitles">
             <% for (Title t : results) {%>   
             <a href="titleInfo.jsp?titleID=<%=t.getTitleID()%>"><%=t.getNovelName()%></a>
@@ -31,5 +29,3 @@
                 session.removeAttribute("results");
             %>
         </div>
-    </body>
-</html>

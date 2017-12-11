@@ -14,6 +14,7 @@
 <!DOCTYPE html>
 <html>
     <head>
+        <%@ include file="header.jsp" %>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title><%=selectedTitle.getNovelName()%></title>
     </head>

@@ -10,6 +10,7 @@
         <% if (session.getAttribute("user") != null) { %>
         <a href="myProfile.jsp">My Profile</a>
         <a href="viewTitles.jsp">View Titles</a>
+        <a href="titleSearch.jsp">Search for a Title</a>
         <%} else { %>
         <a href="login.jsp">Login</a>
         <a href="register.jsp">Register</a>
