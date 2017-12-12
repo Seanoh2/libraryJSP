@@ -30,7 +30,8 @@
             <p>User is an admin.</p>
             <% } else { %>
             <p>User is not an admin.</p>
-            <% } %>   
+            <% } %>
+            
         </div>
         
         <a href="editProfile.jsp">Edit Profile</a>

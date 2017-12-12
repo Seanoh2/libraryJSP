@@ -11,6 +11,7 @@
         <a href="myProfile.jsp">My Profile</a>
         <a href="viewTitles.jsp">View Titles</a>
         <a href="titleSearch.jsp">Search for a Title</a>
+        <a href="viewLoans.jsp">View Loans</a>
         <%} else { %>
         <a href="login.jsp">Login</a>
         <a href="register.jsp">Register</a>

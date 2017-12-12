@@ -12,6 +12,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
 /**
@@ -54,8 +55,8 @@ public class BorrowedDAO extends DAO implements BorrowedDAOInterface {
                 // Get the pieces of a customer from the resultset
                 borrowed.setBorrowedID(rs.getInt("BorrowedID"));
                 borrowed.setUser(userdao.findUserByID(rs.getInt("userID")));
-                borrowed.setTitle(titledao.searchByID(rs.getInt("titleID")));
-                borrowed.setDaysBorrowed(rs.getInt("daysBorrowed"));
+                borrowed.setTitle(titledao.searchByID(rs.getInt("titleID")));           
+                borrowed.setDaysBorrowed(new SimpleDateFormat("dd/MM/yyyy").format(rs.getTimestamp("daysBorrowed")));
                 borrowed.setStatus(rs.getInt("status"));
                 borrowedList.add(borrowed);
 
@@ -115,7 +116,7 @@ public class BorrowedDAO extends DAO implements BorrowedDAOInterface {
                 borrowed.setBorrowedID(rs.getInt("BorrowedID"));
                 borrowed.setUser(userdao.findUserByID(rs.getInt("userID")));
                 borrowed.setTitle(titledao.searchByID(rs.getInt("titleID")));
-                borrowed.setDaysBorrowed(rs.getInt("daysBorrowed"));
+                borrowed.setDaysBorrowed(new SimpleDateFormat("dd/MM/yyyy").format(rs.getTimestamp("daysBorrowed")));
                 borrowed.setStatus(rs.getInt("status"));
                 borrowedList.add(borrowed);
 
@@ -177,7 +178,7 @@ public class BorrowedDAO extends DAO implements BorrowedDAOInterface {
                 borrowed.setBorrowedID(rs.getInt("BorrowedID"));
                 borrowed.setUser(userdao.findUserByID(rs.getInt("userID")));
                 borrowed.setTitle(titledao.searchByID(rs.getInt("titleID")));
-                borrowed.setDaysBorrowed(rs.getInt("daysBorrowed"));
+                borrowed.setDaysBorrowed(new SimpleDateFormat("dd/MM/yyyy").format(rs.getTimestamp("daysBorrowed")));
                 borrowed.setStatus(rs.getInt("status"));
                 borrowedList.add(borrowed);
 
@@ -236,7 +237,7 @@ public class BorrowedDAO extends DAO implements BorrowedDAOInterface {
                 borrowed.setBorrowedID(rs.getInt("BorrowedID"));
                 borrowed.setUser(userdao.findUserByID(rs.getInt("userID")));
                 borrowed.setTitle(titledao.searchByID(rs.getInt("titleID")));
-                borrowed.setDaysBorrowed(rs.getInt("daysBorrowed"));
+                borrowed.setDaysBorrowed(new SimpleDateFormat("dd/MM/yyyy").format(rs.getTimestamp("daysBorrowed")));
                 borrowed.setStatus(rs.getInt("status"));
                 borrowedList.add(borrowed);
 
@@ -342,7 +343,7 @@ public class BorrowedDAO extends DAO implements BorrowedDAOInterface {
                 borrowed.setBorrowedID(rs.getInt("BorrowedID"));
                 borrowed.setUser(userdao.findUserByID(rs.getInt("userID")));
                 borrowed.setTitle(titledao.searchByID(rs.getInt("titleID")));
-                borrowed.setDaysBorrowed(rs.getInt("daysBorrowed"));
+                borrowed.setDaysBorrowed(new SimpleDateFormat("dd/MM/yyyy").format(rs.getTimestamp("daysBorrowed")));
                 borrowed.setStatus(rs.getInt("status"));
             }
 
@@ -387,17 +388,15 @@ public class BorrowedDAO extends DAO implements BorrowedDAOInterface {
         try {
             con = getConnection();
             //Adding new borrowed entry
-            String query = "INSERT INTO borrowed VALUES(NULL,?,?,?,?)";
+            String query = "INSERT INTO borrowed VALUES(NULL,?,?,NULL,?)";
             ps = con.prepareStatement(query);
             int userID = borrowed.getUser().getUserID();
             int titleID = borrowed.getTitle().getTitleID();
-            int daysBorrowed = borrowed.getDaysBorrowed();
             int status = borrowed.getStatus();
 
             ps.setInt(1, userID);
             ps.setInt(2, titleID);
-            ps.setInt(3, daysBorrowed);
-            ps.setInt(4, status);
+            ps.setInt(3, status);
 
             // Execute the query
             rs = ps.executeUpdate();
@@ -465,7 +464,7 @@ public class BorrowedDAO extends DAO implements BorrowedDAOInterface {
                 borrowed.setBorrowedID(rs.getInt("BorrowedID"));
                 borrowed.setUser(userdao.findUserByID(rs.getInt("userID")));
                 borrowed.setTitle(titledao.searchByID(rs.getInt("titleID")));
-                borrowed.setDaysBorrowed(rs.getInt("daysBorrowed"));
+                borrowed.setDaysBorrowed(new SimpleDateFormat("dd/MM/yyyy").format(rs.getTimestamp("daysBorrowed")));
                 borrowed.setStatus(rs.getInt("status"));
             }
 

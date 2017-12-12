@@ -15,7 +15,7 @@ public class Borrowed {
     private int BorrowedID;
     private User user;
     private Title title;
-    private int daysBorrowed;
+    private String daysBorrowed;
     private int status;
 
     /**
@@ -27,14 +27,14 @@ public class Borrowed {
      * @param daysBorrowed Used to track how long it was borrowed.
      * @param status Used to keep a record of if it was returned.
      */
-    public Borrowed(int borrowedID, User user, Title title, int daysBorrowed, int status) {
+    public Borrowed(int borrowedID, User user, Title title, String daysBorrowed, int status) {
         this.BorrowedID = borrowedID;
         this.user = user;
         this.title = title;
         this.daysBorrowed = daysBorrowed;
         this.status = status;
     }
-    public Borrowed(User user, Title title, int daysBorrowed, int status) {
+    public Borrowed(User user, Title title, String daysBorrowed, int status) {
         this.user = user;
         this.title = title;
         this.daysBorrowed = daysBorrowed;
@@ -65,11 +65,11 @@ public class Borrowed {
         this.title = title;
     }
 
-    public int getDaysBorrowed() {
+    public String getDaysBorrowed() {
         return daysBorrowed;
     }
 
-    public void setDaysBorrowed(int daysBorrowed) {
+    public void setDaysBorrowed(String daysBorrowed) {
         this.daysBorrowed = daysBorrowed;
     }
 

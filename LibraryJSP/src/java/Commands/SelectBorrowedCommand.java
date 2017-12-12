@@ -30,7 +30,7 @@ public class SelectBorrowedCommand implements Command {
         int titleID = (Integer) session.getAttribute("borrowedChoice");
         Title titleChoice = titleDao.searchByID(titleID);
         User loggedInUser = (User) session.getAttribute("user");
-        Borrowed attemptAdd = new Borrowed(loggedInUser, titleChoice, 0, 0);
+        Borrowed attemptAdd = new Borrowed(loggedInUser, titleChoice, null, 0);
 
         if (borrowedDao.checkIfAlreadyBorrowed(loggedInUser.getUserID(), titleID) == null) {
             if (borrowedDao.addBorrowed(attemptAdd)) {
