@@ -91,6 +91,11 @@ public class CommandFactory {
                 case "deleteuser":
                     command = new DeleteUserCommand();
                     break;
+                    
+                case "edituser":
+                    command = new EditUserCommand();
+                    break;
+                    
                 default:
                     command = new NoValidActionCommand();
                     break;

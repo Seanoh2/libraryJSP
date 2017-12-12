@@ -68,4 +68,11 @@ public interface UserDAOInterface {
      */
     public User login(String email, String password);
     
+    /**
+     * This will be used to update a users information.
+     * Password will be done through another system as this current method would be insecure.
+     * @param user used to identify and import user information.
+     * @return 
+     */
+    public boolean updateUser(User user);
 }

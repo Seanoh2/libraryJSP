@@ -424,4 +424,73 @@ public class UserDAO extends DAO implements UserDAOInterface {
         }
 
     }
+    
+    @Override
+    public boolean updateUser(User attemptUpdate) {
+        Connection conn = null;
+        PreparedStatement ps = null;
+        int rs = 0;
+        Boolean result = null;
+
+        try {
+            conn = getConnection();
+            String query = "UPDATE users SET email=?, firstName=?, lastName=?, country=?, addressLine1=?, addressLine2 =? WHERE userID=?";
+            ps = conn.prepareStatement(query);
+            int userID = attemptUpdate.getUserID();
+            String email = attemptUpdate.getEmail();
+            String firstName = attemptUpdate.getFirstName();
+            String lastName = attemptUpdate.getLastName();
+            String country = attemptUpdate.getCountry();
+            String addressLine1 = attemptUpdate.getAddressLine1();
+            String addressLine2 = attemptUpdate.getAddressLine2();
+
+            // Fill in the blanks, i.e. parameterize the query
+            ps.setString(1, email);
+            ps.setString(2, firstName);
+            ps.setString(3, lastName);
+            ps.setString(4, country);
+            ps.setString(5, addressLine1);
+            ps.setString(6, addressLine2);
+            ps.setInt(7, userID);
+
+            // Execute the query
+            rs = ps.executeUpdate();
+
+        } catch (MySQLIntegrityConstraintViolationException e) {
+            System.out.println("Constraint Exception occurred: " + e.getMessage());
+            // Set the rowsAffected to -1, this can be used as a flag for the display section
+            rs = -1;
+
+        } catch (SQLException se) {
+            System.out.println("SQL Exception occurred: " + se.getMessage());
+            se.printStackTrace();
+        } catch (Exception e) {
+            System.out.println("Exception occurred: " + e.getMessage());
+            e.printStackTrace();
+        } // Now that the program has completed its database access component, 
+        // close the open access points (resultset, preparedstatement, connection)
+        // Remember to close them in the OPPOSITE ORDER to how they were opened
+        // Opening order: Connection -> PreparedStatement -> ResultSet
+        // Closing order: ResultSet -> PreparedStatement -> Connection
+        finally {
+            try {
+                if (ps != null) {
+                    ps.close();
+                }
+                if (conn != null) {
+                    freeConnection(conn);
+                }
+            } catch (SQLException e) {
+                System.out.println("Exception occured in the finally section in the updateUser() method");
+            }
+        }
+
+        if (rs > 0) {
+            result = true;
+        } else {
+            result = false;
+        }
+
+        return result;
+    }
 }

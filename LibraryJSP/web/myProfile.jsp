@@ -32,8 +32,7 @@
             <p>User is not an admin.</p>
             <% } %>
             
-        </div>
-        
+        </div>      
         <a href="editProfile.jsp">Edit Profile</a>
     </body>
 </html>
