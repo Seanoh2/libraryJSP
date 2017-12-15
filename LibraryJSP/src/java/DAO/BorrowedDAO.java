@@ -388,7 +388,7 @@ public class BorrowedDAO extends DAO implements BorrowedDAOInterface {
         try {
             con = getConnection();
             //Adding new borrowed entry
-            String query = "INSERT INTO borrowed VALUES(NULL,?,?,NULL,?)";
+            String query = "INSERT INTO borrowed VALUES(NULL,?,?,CURRENT_TIMESTAMP(),?)";
             ps = con.prepareStatement(query);
             int userID = borrowed.getUser().getUserID();
             int titleID = borrowed.getTitle().getTitleID();

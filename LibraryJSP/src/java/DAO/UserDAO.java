@@ -5,6 +5,7 @@
  */
 package DAO;
 
+import Dtos.Password;
 import Dtos.User;
 import com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException;
 import interfaces.UserDAOInterface;
@@ -202,13 +203,15 @@ public class UserDAO extends DAO implements UserDAOInterface {
         PreparedStatement ps = null;
         int rs = 0;
         Boolean result = null;
+        
 
         try {
+            String hashedPassword = Password.hashString(u.getPassword());
             conn = getConnection();
             String query = "INSERT INTO users VALUES (NULL, ?, ?, ?, ?, ?, ?, ?, ?, NULL)";
             ps = conn.prepareStatement(query);
             ps.setString(1, u.getEmail());
-            ps.setString(2, u.getPassword());
+            ps.setString(2, hashedPassword);
             ps.setString(3, u.getFirstName());
             ps.setString(4, u.getLastName());
             ps.setString(5, u.getCountry());
@@ -268,13 +271,12 @@ public class UserDAO extends DAO implements UserDAOInterface {
         {
             con = this.getConnection();
             
-            String query = "SELECT * FROM users WHERE email = ? AND password = ?";
+            String query = "SELECT * FROM users WHERE email = ?";
             ps = con.prepareStatement(query);
             ps.setString(1, email);
-            ps.setString(2, password);
             
             rs = ps.executeQuery();
-            if (rs.next()) 
+            if (rs.next() && Password.checkPassword(password, rs.getString("password")) ) 
             {
                 u = new User();
                 u.setUserID(rs.getInt("userID"));

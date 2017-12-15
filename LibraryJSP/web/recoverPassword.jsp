@@ -1,6 +1,6 @@
 <%-- 
-    Document   : login
-    Created on : 09-Dec-2017, 15:45:17
+    Document   : recoverPassword
+    Created on : 15-Dec-2017, 00:58:53
     Author     : Sean
 --%>
 
@@ -14,16 +14,11 @@
     </head>
     <body>
         <form action="FrontController" method="post">
-        <input type="hidden" value="login" name="action">
-        Email:
+        <input type="hidden" value="passwordrecovery" name="action">
+        Please enter associated email:
         <input type="text" name="email" required>
-        <br>
-        Password:
-        <input type="text" name="password" required>
-        <br>
-        <a href="recoverPassword.jsp">Recover password</a>
         <br><br>
-        <input type="submit" value="Login">
+        <input type="submit" value="Recover">
         </form>
     </body>
 </html>

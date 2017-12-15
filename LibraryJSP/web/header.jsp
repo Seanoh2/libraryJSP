@@ -12,17 +12,10 @@
         <a href="viewTitles.jsp">View Titles</a>
         <a href="titleSearch.jsp">Search for a Title</a>
         <a href="viewLoans.jsp">View Loans</a>
+        <a href="FrontController?action=logout">Logout</a>
         <%} else { %>
         <a href="login.jsp">Login</a>
         <a href="register.jsp">Register</a>
         <% } %>
     </ul>
-
-    <% if (session.getAttribute("message") != null) { %>
-    <script>
-        window.alert(message);
-    </script>
-    <% session.removeAttribute("message");
-        }
-    %>
 </div>

@@ -13,15 +13,24 @@
 <% ArrayList<Title> results;
     if (session.getAttribute("results") == null) {
         results = titleDao.viewAllTitles();
+        session.setAttribute("message", "No titles found.");
     } else {
         results = (ArrayList<Title>) session.getAttribute("results");
     }%>
-<% User currentUser = (User) session.getAttribute("user"); %>
+<% User currentUser = (User) session.getAttribute("user");
+   %>
+<html>
+    <head>
+        <%@ include file="header.jsp" %>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <title>View Titles</title>
+    </head>
+    <body>
         <div name="viewTitles">
             <% for (Title t : results) {%>   
             <a href="titleInfo.jsp?titleID=<%=t.getTitleID()%>"><%=t.getNovelName()%></a>
 
-            <% if (currentUser != null && currentUser.getIsAdmin() == 1) { %>
+            <% if (currentUser != null && currentUser.getIsAdmin() == 1) {%>
             <button type="button" onclick="location.href = 'deleteTitle.jsp?titleID=<%=t.getTitleID()%>';">Delete</button> 
             <% } %>
             <br> 
@@ -29,3 +38,5 @@
                 session.removeAttribute("results");
             %>
         </div>
+    </body>
+</html>

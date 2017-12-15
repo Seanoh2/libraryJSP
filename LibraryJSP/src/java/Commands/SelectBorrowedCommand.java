@@ -27,7 +27,7 @@ public class SelectBorrowedCommand implements Command {
         TitleDAO titleDao = new TitleDAO("librarydatabase");
         BorrowedDAO borrowedDao = new BorrowedDAO("librarydatabase");
 
-        int titleID = (Integer) session.getAttribute("borrowedChoice");
+        int titleID = Integer.parseInt(request.getParameter("titleID"));
         Title titleChoice = titleDao.searchByID(titleID);
         User loggedInUser = (User) session.getAttribute("user");
         Borrowed attemptAdd = new Borrowed(loggedInUser, titleChoice, null, 0);

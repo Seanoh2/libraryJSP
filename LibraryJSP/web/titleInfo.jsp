@@ -33,6 +33,10 @@
             
             On Loan:
             <p><%= selectedTitle.getOnLoan()%></p>
+            
+            <% if(session.getAttribute("user") != null) { %>
+            <a href="FrontController?action=borrowTitle&titleID=<%=selectedTitle.getTitleID()%>">Borrow Title</a>
+            <% } %>
         </div>
     </body>
 </html>

@@ -96,6 +96,10 @@ public class CommandFactory {
                     command = new EditUserCommand();
                     break;
                     
+                case "passwordrecovery":
+                    command = new RequestPasswordCommand();
+                    break;
+                    
                 default:
                     command = new NoValidActionCommand();
                     break;

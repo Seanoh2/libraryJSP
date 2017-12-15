@@ -13,7 +13,6 @@
         <title>My Home</title>
     </head>
     <body>
-        <%@ include file="viewTitles.jsp" %>
         <% if (session.getAttribute("user") != null) { %>
         <h1>Logged in!</h1>
         <% }%>
