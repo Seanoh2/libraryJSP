@@ -17,6 +17,30 @@
         <%@ include file="header.jsp" %>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title><%=selectedTitle.getNovelName()%></title>
+        
+        <style>
+            
+            body{
+                background-color:#37383a;
+                color:white;
+                font-size:12px;
+            }
+            
+            
+        
+            #titleDetails{
+                position:absolute;
+                width:500px;
+                height:500px;
+                margin-left:10px;
+            }
+            
+            #borrowLink{
+                font-size:16px;
+                
+            }
+            
+        </style>
     </head>
     <body>
         <div id="titleDetails">
@@ -35,7 +59,7 @@
             <p><%= selectedTitle.getOnLoan()%></p>
             
             <% if(session.getAttribute("user") != null) { %>
-            <a href="FrontController?action=borrowTitle&titleID=<%=selectedTitle.getTitleID()%>">Borrow Title</a>
+            <a id="borrowLink" href="FrontController?action=borrowTitle&titleID=<%=selectedTitle.getTitleID()%>">Borrow Title</a>
             <% } %>
         </div>
     </body>

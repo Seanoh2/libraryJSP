@@ -15,16 +15,25 @@
         <%@ include file="header.jsp" %>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>My Profile</title>
+        
+        <style>
+        
+            body{
+                background-color:#37383a;
+                color:white;
+            }
+            
+        </style>
     </head>
     <body>
         <div id="profileDetails">
-            <h1><%=currentUser.getEmail()%></h1>
-            <p><%=currentUser.getFirstName() %></p><br/>
-            <p><%=currentUser.getLastName() %></p><br/>
-            <p><%=currentUser.getCountry() %></p><br/>
-            <p><%=currentUser.getAddressLine1() %></p><br/>
-            <p><%=currentUser.getAddressLine2() %></p><br/>
-            <p><%=currentUser.getUserID() %></p><br/>
+            <h1>User: <%=currentUser.getEmail()%></h1>
+            <p>First name: <%=currentUser.getFirstName() %></p><br/>
+            <p>Last name: <%=currentUser.getLastName() %></p><br/>
+            <p>Country: <%=currentUser.getCountry() %></p><br/>
+            <p>Address Line 1: <%=currentUser.getAddressLine1() %></p><br/>
+            <p>Address Line 2: <%=currentUser.getAddressLine2() %></p><br/>
+            <p>User id: <%=currentUser.getUserID() %></p><br/>
             
             <%if(currentUser.getIsAdmin() == 1) { %>
             <p>User is an admin.</p>

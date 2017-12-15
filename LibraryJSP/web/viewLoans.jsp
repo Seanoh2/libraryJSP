@@ -29,8 +29,19 @@
 %>
 <html>
     <head>
+        <%@ include file="header.jsp" %>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Borrowed Titles</title>
+        
+        <style>
+        
+            body{
+                background-color:#37383a;
+                color:white;
+            }
+            
+        </style>
+        
     </head>
     <body>
         <div id="onLoanDisplay">

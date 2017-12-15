@@ -12,6 +12,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.Properties;
 import java.util.UUID;
 import javax.mail.Message;
@@ -60,12 +62,15 @@ public class EmailDAO extends DAO {
             message.setRecipients(Message.RecipientType.TO,
                     InternetAddress.parse(email));
             message.setSubject("Password Recovery");
-            message.setText("Recovery Link: http://localhost:8084/LibraryJSP/recoverPassword.jsp?" + id.toString());
+            message.setText("Recovery Link: http://localhost:8084/LibraryJSP/resetPassword.jsp?" + id.toString());
 
             Transport.send(message);
 
-           result = this.CreateRecoveryLog(id, email);
-            
+            if (this.CreateRecoveryLog(id, email)) {
+                result = true;
+                Transport.send(message);
+            }
+
         } catch (MessagingException e) {
             throw new RuntimeException(e);
         }
@@ -75,17 +80,19 @@ public class EmailDAO extends DAO {
     public boolean CreateRecoveryLog(UUID id, String email) {
         Connection conn = null;
         PreparedStatement ps = null;
-        int rs = 0;
-        Boolean result = null;
+        UserDAO userDao = new UserDAO("librarydatabase");
+        int userID = userDao.getUserByEmail(email).getUserID();
         String hashID = Password.hashString(id.toString());
+        Boolean result = null;
+        int rs = 0;
 
         try {
             conn = getConnection();
 
-            String query = "INSERT INTO passwordrecovery VALUES (?,?)";
+            String query = "INSERT INTO passwordrecovery VALUES (NULL,CURRENT_TIMESTAMP(),?,?)";
             ps = conn.prepareStatement(query);
-            ps.setString(1, hashID);
-            ps.setString(2, email);
+            ps.setInt(1, userID);
+            ps.setString(2, hashID);
 
             rs = ps.executeUpdate();
         } catch (MySQLIntegrityConstraintViolationException e) {
@@ -120,4 +127,65 @@ public class EmailDAO extends DAO {
         return result;
 
     }
+
+    public User checkUUID(String userUUID, int id) {
+        User result = null;
+        Connection conn = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        UserDAO userDao = new UserDAO("librarydatabase");
+
+        Date time = null;
+        User tempUser = new User();
+        String hashedUUID = "";
+
+        try {
+            conn = getConnection();
+
+            String query = "SELECT * FROM passwordrecovery WHERE UUID = ?";
+            ps = conn.prepareStatement(query);
+            ps.setInt(1, id);
+            rs = ps.executeQuery();
+
+            if (rs.next()) {
+                time = rs.getDate("Time");
+                tempUser = userDao.findUserByID(rs.getInt("UserID"));
+                hashedUUID = rs.getString("UUID");
+                
+            }
+        
+       if(Password.checkPassword(userUUID, hashedUUID)) {
+           Calendar calendar = Calendar.getInstance();
+           calendar.setTime(time);
+           calendar.add(Calendar.DAY_OF_YEAR, 7);
+           
+           if(calendar.getTime().compareTo(time)>0) {
+               result = tempUser;
+           }
+       }
+            
+            
+
+        } catch (SQLException e) {
+            System.out.println("Exception occured in the checkUUID() method: " + e.getMessage());
+        } finally {
+            try {
+                if (rs != null) {
+                    rs.close();
+                }
+                if (ps != null) {
+                    ps.close();
+                }
+                if (conn != null) {
+                    freeConnection(conn);
+                }
+            } catch (SQLException e) {
+                System.out.println("Exception occured in the finally section of the selectUserByUsername() method: " + e.getMessage());
+            }
+        }
+
+        return result;
+    }
+    
+    
 }

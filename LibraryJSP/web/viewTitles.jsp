@@ -24,10 +24,27 @@
         <%@ include file="header.jsp" %>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>View Titles</title>
+        
+        <style>
+            body{
+                background-color:#37383a;
+            }
+            
+            #viewTitles{
+                border-style:solid;
+                border-width:1px;
+                border-color:white;
+                width:300px;
+                margin-left:500px;
+                margin-top:200px;
+                font-size:16px;
+            }
+        </style>
     </head>
     <body>
-        <div name="viewTitles">
-            <% for (Title t : results) {%>   
+        <div id="viewTitles" name="viewTitles">
+            <center>
+                <% for (Title t : results) {%>   
             <a href="titleInfo.jsp?titleID=<%=t.getTitleID()%>"><%=t.getNovelName()%></a>
 
             <% if (currentUser != null && currentUser.getIsAdmin() == 1) {%>
@@ -37,6 +54,7 @@
             <% }
                 session.removeAttribute("results");
             %>
+            </center>
         </div>
     </body>
 </html>

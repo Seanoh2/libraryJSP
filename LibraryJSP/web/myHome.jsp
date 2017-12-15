@@ -11,10 +11,21 @@
         <%@ include file="header.jsp" %>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>My Home</title>
+        
+        <style>
+            body{
+                background-color:#37383a;
+            }
+            
+            #greeting{
+                color:white;
+                font-size:30px;
+            }
+        </style>
     </head>
     <body>
         <% if (session.getAttribute("user") != null) { %>
-        <h1>Logged in!</h1>
+        <h1 id="greeting">Logged in</h1>
         <% }%>
     </body>
 </html>

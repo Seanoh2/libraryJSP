@@ -32,7 +32,7 @@ public class RequestPasswordCommand implements Command {
             if (checkEmail != null) {
                 if (emailDao.sendEmailRecovery(email)) {
                     session.setAttribute("message", "Recovery message have been sent.");
-                    forwardToJsp = "myHome.jsp";
+                    forwardToJsp = "login.jsp";
                 } else {
                     String errorMessage = "Error sending request password.";
                     session.setAttribute("errorMessage", errorMessage);
