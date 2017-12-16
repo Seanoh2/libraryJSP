@@ -27,7 +27,7 @@ public class getAverageRatingCommand implements Command{
         int titleID = Integer.parseInt(request.getParameter("titleID"));
         
         if (titleID !=0){
-            double rating = Double.parseDouble((ratingdao.getAverageRatingByID(titleID)));
+            double rating = Double.parseDouble(ratingdao.getAverageRatingByID(titleID));
             session.setAttribute("rating", rating);
             forwardToJsp = "ratingDisplay.jsp";
         } else {
