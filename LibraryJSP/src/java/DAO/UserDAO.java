@@ -495,4 +495,64 @@ public class UserDAO extends DAO implements UserDAOInterface {
 
         return result;
     }
+    
+    public boolean updatePassword(String password, User user) {
+        Connection conn = null;
+        PreparedStatement ps = null;
+        EmailDAO emailDao = new EmailDAO("librarydatabase");
+        int rs = 0;
+        Boolean result = null;
+
+        try {
+            conn = getConnection();
+            String query = "UPDATE users SET password=? WHERE userID=?";
+            ps = conn.prepareStatement(query);
+            String hashedPassword = Password.hashString(password);
+
+            // Fill in the blanks, i.e. parameterize the query
+            ps.setString(1, hashedPassword);
+            ps.setInt(2, user.getUserID());
+
+            // Execute the query
+            rs = ps.executeUpdate();
+
+        } catch (MySQLIntegrityConstraintViolationException e) {
+            System.out.println("Constraint Exception occurred: " + e.getMessage());
+            // Set the rowsAffected to -1, this can be used as a flag for the display section
+            rs = -1;
+
+        } catch (SQLException se) {
+            System.out.println("SQL Exception occurred: " + se.getMessage());
+            se.printStackTrace();
+        } catch (Exception e) {
+            System.out.println("Exception occurred: " + e.getMessage());
+            e.printStackTrace();
+        } // Now that the program has completed its database access component, 
+        // close the open access points (resultset, preparedstatement, connection)
+        // Remember to close them in the OPPOSITE ORDER to how they were opened
+        // Opening order: Connection -> PreparedStatement -> ResultSet
+        // Closing order: ResultSet -> PreparedStatement -> Connection
+        finally {
+            try {
+                if (ps != null) {
+                    ps.close();
+                }
+                if (conn != null) {
+                    freeConnection(conn);
+                }
+            } catch (SQLException e) {
+                System.out.println("Exception occured in the finally section in the updateUser() method");
+            }
+        }
+
+        if (rs > 0) {
+            result = true;
+            emailDao.removeRecovereyLog(user.getUserID());
+        } else {
+            result = false;
+        }
+
+        return result;
+        
+    }
 }

@@ -15,7 +15,7 @@ public class Email {
     
     private int ID;
     private Date Time;
-    private int UserID;
+    private User User;
     private String UUID;
     
     /**
@@ -28,10 +28,10 @@ public class Email {
      * @param UserID Used to identify what user needs a password recovery.
      * @param UUID Used to verify who is attempting the recovery.
      */
-    public Email(int ID, Date Time, int UserID, String UUID) {
+    public Email(int ID, Date Time, User User, String UUID) {
         this.ID = ID;
         this.Time = Time;
-        this.UserID = UserID;
+        this.User = User;
         this.UUID = UUID;
     }
     
@@ -45,9 +45,9 @@ public class Email {
      * @param UserID Used to identify what user needs a password recovery.
      * @param UUID Used to verify who is attempting the recovery.
      */
-    public Email(Date Time, int UserID, String UUID) {
+    public Email(Date Time, User User, String UUID) {
         this.Time = Time;
-        this.UserID = UserID;
+        this.User = User;
         this.UUID = UUID;
     }
 
@@ -79,13 +79,13 @@ public class Email {
     }
 
 
-    public int getUserID() {
-        return UserID;
+    public User getUser() {
+        return User;
     }
 
 
-    public void setUserID(int UserID) {
-        this.UserID = UserID;
+    public void setUser(User User) {
+        this.User = User;
     }
 
 

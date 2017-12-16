@@ -99,6 +99,10 @@ public class CommandFactory {
                 case "passwordrecovery":
                     command = new RequestPasswordCommand();
                     break;
+                 
+                case "resetpassword":
+                    command = new ResetPasswordCommand();
+                    break;
                     
                 default:
                     command = new NoValidActionCommand();
