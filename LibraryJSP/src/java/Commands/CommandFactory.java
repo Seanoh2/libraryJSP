@@ -104,6 +104,14 @@ public class CommandFactory {
                     command = new ResetPasswordCommand();
                     break;
                     
+                case "rate":
+                    command = new rateCommand();
+                    break;
+                    
+                case "getAverageRating":
+                    command = new getAverageRatingCommand();
+                    break;
+                    
                 default:
                     command = new NoValidActionCommand();
                     break;

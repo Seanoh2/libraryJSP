@@ -50,7 +50,7 @@ public class ReturnBorrowedCommand implements Command {
             session.setAttribute("errorMessage", errorMessage);
             forwardToJsp = "error.jsp";
         }
-
+        
         return forwardToJsp;
     }
 
