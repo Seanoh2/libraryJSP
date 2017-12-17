@@ -29,6 +29,13 @@
         <%@ include file="header.jsp" %>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Check return</title>
+        
+        <style>
+            body{
+                background-color:#37383a;
+                color:white;
+            }
+            </style>
     </head>
     <body>
         <h1>Overdue fee: <%=overdueFee%></h1>
