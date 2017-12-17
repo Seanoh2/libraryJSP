@@ -18,6 +18,17 @@ import javax.servlet.http.HttpSession;
  */
 public class EditUserCommand implements Command {
 
+    /**
+     * Used to edit users information, exception being password which is done apart.
+     * Any blanks on form are replaced with original information.
+     * If blanks still present, Error appears.
+     * Otherwise, Info is replaced and session is updated to show this.
+     * 
+     * 
+     * @param request Used to grab POST data and information of session.
+     * @param response Not used in the method but can be used to set cookies.
+     * @return String of webpage to redirect to.
+     */
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) {
         String forwardToJsp = "";

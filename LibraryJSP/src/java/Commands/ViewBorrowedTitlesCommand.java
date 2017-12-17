@@ -19,6 +19,15 @@ import javax.servlet.http.HttpSession;
  */
 public class ViewBorrowedTitlesCommand implements Command {
 
+    /**
+     * Used to grab all borrowedTitles by user into an arrayList. Adds arrayList
+     * into session variable to be displayed to user. Otherwise, redirects user
+     * error.jsp with error message. 
+     *
+     * @param request Used to grab POST data and information of session.
+     * @param response Not used in the method but can be used to set cookies.
+     * @return String of webpage to redirect to.
+     */
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) {
         /**

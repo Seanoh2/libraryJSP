@@ -34,15 +34,17 @@
 </script> 
 <html>
     <head>
+        <%@ include file="header.jsp" %>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Error</title>
     </head>
     <body>
+        <div id="Error">
         <h1 id="error"><%=session.getAttribute("errorMessage")%></h1>
         <%session.removeAttribute("errorMessage");%>
 
 
         <button id="submit" onclick="goBack()">Go Back</button>
-
+        </div>
     </body>
 </html>

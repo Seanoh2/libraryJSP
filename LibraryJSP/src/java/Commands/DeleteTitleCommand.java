@@ -27,8 +27,8 @@ public class DeleteTitleCommand implements Command {
 
         if (currentUser.getUserID() == 1) {
             int userChoice = Integer.parseInt(request.getParameter("userChoice"));
-            boolean result = titleDao.deleteTitleById(userChoice);
             if (userChoice != 0) {
+                boolean result = titleDao.deleteTitleById(userChoice);
                 if (result) {
                     String message = "Title removed from database.";
                     forwardToJsp = "myHome.jsp";

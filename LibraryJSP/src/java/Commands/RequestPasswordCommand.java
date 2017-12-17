@@ -18,6 +18,15 @@ import javax.servlet.http.HttpSession;
  */
 public class RequestPasswordCommand implements Command {
 
+    /**
+     * Used for user to request a password recovery email. If information is
+     * valid and email is in database, User is sent a email with link and UUID
+     * to identify request. Otherwise, Redirected to error with error message.
+     *
+     * @param request Used to grab POST data and information of session.
+     * @param response Not used in the method but can be used to set cookies.
+     * @return String of webpage to redirect to.
+     */
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) {
         String forwardToJsp = "";
@@ -38,7 +47,7 @@ public class RequestPasswordCommand implements Command {
                     session.setAttribute("errorMessage", errorMessage);
                     forwardToJsp = "error.jsp";
                 }
-                
+
             } else {
                 String errorMessage = "Email not found in system.";
                 session.setAttribute("errorMessage", errorMessage);

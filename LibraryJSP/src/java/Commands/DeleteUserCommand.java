@@ -15,6 +15,16 @@ import javax.servlet.http.HttpSession;
  * @author Sean
  */
 public class DeleteUserCommand implements Command {
+    
+    /**
+     * Used to delete users from the database.
+     * Slightly diffrent structure from other commands, DAO method returns 1-4 rather than boolean.
+     * Result still same to ensure command will function like others.
+     * 
+     * @param request Used to grab POST data and information of session.
+     * @param response Not used in the method but can be used to set cookies.
+     * @return String of webpage to redirect to.
+     */
 
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) {

@@ -18,6 +18,15 @@ import javax.servlet.http.HttpSession;
  */
 public class ResetPasswordCommand implements Command {
 
+    /**
+     * Used when email link has be sent and clicked, UUID is hashed and checked,
+     * if valid than user enters new password, hashed than added to system.
+     * If invalid, user is sent to error.jsp with error message.
+     *
+     * @param request Used to grab POST data and information of session.
+     * @param response Not used in the method but can be used to set cookies.
+     * @return String of webpage to redirect to.
+     */
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) {
         String forwardToJsp = "";

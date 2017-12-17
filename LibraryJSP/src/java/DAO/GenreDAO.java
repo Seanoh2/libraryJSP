@@ -19,6 +19,11 @@ import java.util.ArrayList;
  */
 public class GenreDAO extends DAO implements GenreDAOInterface {
 
+    /**
+     * Used to create connection to database to manipulate information.
+     *
+     * @param databaseName Used to identify what database to connect to.
+     */
     public GenreDAO(String databaseName) {
         super(databaseName);
     }
@@ -26,10 +31,10 @@ public class GenreDAO extends DAO implements GenreDAOInterface {
 //    public GenreDAO(String libraryDatabase) {
 //        super(libraryDatabase);
 //    }
-
     /**
      * This will return a Genre object by their ID.<p>
      * Single Genre object.
+     *
      * @param genreID This will be used to find what genre is needed.
      * @return A Genre object from database.
      */

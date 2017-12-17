@@ -4,16 +4,30 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
+/**
+ *
+ * @author Sean
+ */
 public class DAO {
+
     private String databaseName;
-    
-    public DAO(String databaseName)
-    {
+
+    /**
+     *
+     * @param databaseName
+     */
+    public DAO(String databaseName) {
         this.databaseName = databaseName;
     }
-    
-    public Connection getConnection()
-    {
+
+    /**
+     * Used to create a connection to the database, so that database information
+     * can be manipulated. Constructor requires database name so that you can
+     * connect to other databases if needed.
+     *
+     * @return Connection to database.
+     */
+    public Connection getConnection() {
 
         String driver = "com.mysql.jdbc.Driver";
         String url = "jdbc:mysql://localhost:3306/" + databaseName;
@@ -33,8 +47,12 @@ public class DAO {
         return con;
     }
 
-    public void freeConnection(Connection con)
-    {
+    /**
+     * Used to close and disconnect database connction if connection is found.
+     *
+     * @param con Used to identify what connection to close.
+     */
+    public void freeConnection(Connection con) {
         try {
             if (con != null) {
                 con.close();

@@ -20,6 +20,16 @@ import javax.servlet.http.HttpSession;
  */
 public class ReturnBorrowedCommand implements Command {
 
+    /**
+     * Used to return a borrowed title from DB.
+     * This is typically done after user has payed overdue fees.
+     * If valid, stock and onloan is changed to reflect added title.
+     * Otherwise, redirected to error.jsp with error message.
+     *
+     * @param request Used to grab POST data and information of session.
+     * @param response Not used in the method but can be used to set cookies.
+     * @return String of webpage to redirect to.
+     */
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) {
         String forwardToJsp = "";

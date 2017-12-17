@@ -21,9 +21,14 @@ import java.util.ArrayList;
  */
 public class BorrowedDAO extends DAO implements BorrowedDAOInterface {
 
+    /**
+     *
+     * @param databaseName
+     */
     public BorrowedDAO(String databaseName) {
         super(databaseName);
     }
+
     /**
      * This will return a borrowed ArrayList by their userID.<p>
      * User must be logged in to do this.<p>
@@ -55,7 +60,7 @@ public class BorrowedDAO extends DAO implements BorrowedDAOInterface {
                 // Get the pieces of a customer from the resultset
                 borrowed.setBorrowedID(rs.getInt("BorrowedID"));
                 borrowed.setUser(userdao.findUserByID(rs.getInt("userID")));
-                borrowed.setTitle(titledao.searchByID(rs.getInt("titleID")));           
+                borrowed.setTitle(titledao.searchByID(rs.getInt("titleID")));
                 borrowed.setDaysBorrowed(new SimpleDateFormat("dd/MM/yyyy").format(rs.getTimestamp("daysBorrowed")));
                 borrowed.setStatus(rs.getInt("status"));
                 borrowedList.add(borrowed);
@@ -412,8 +417,7 @@ public class BorrowedDAO extends DAO implements BorrowedDAOInterface {
         } catch (Exception e) {
             System.out.println("Exception occurred: " + e.getMessage());
             e.printStackTrace();
-        } 
-        // Now that the program has completed its database access component, 
+        } // Now that the program has completed its database access component, 
         // close the open access points (resultset, preparedstatement, connection)
         // Remember to close them in the OPPOSITE ORDER to how they were opened
         // Opening order: Connection -> PreparedStatement -> ResultSet
@@ -440,6 +444,16 @@ public class BorrowedDAO extends DAO implements BorrowedDAOInterface {
         return result;
     }
 
+    /**
+     * Used to check if a title is already borrowed by the user. This is done to
+     * ensure the user cannot borrow the title twice or more.
+     * If borrowed found, borrowed is returned with information.
+     * Otherwise, Borrowed is returned with null.
+     *
+     * @param request Used to grab POST data and information of session.
+     * @param response Not used in the method but can be used to set cookies.
+     * @return Borrowed object with information or null.
+     */
     @Override
     public Borrowed checkIfAlreadyBorrowed(int userID, int titleID) {
         Connection con = null;

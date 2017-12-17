@@ -20,6 +20,11 @@ import java.util.ArrayList;
  */
 public class TitleDAO extends DAO implements TitleDAOInterface {
 
+    /**
+     * Used to create connection to database to manipulate information.
+     *
+     * @param databaseName Used to identify what database to connect to.
+     */
     public TitleDAO(String databaseName) {
         super(databaseName);
     }

@@ -13,5 +13,13 @@ import javax.servlet.http.HttpServletResponse;
  * @author grahamm
  */
 public interface Command {
+
+    /**
+     * Used as a basis for all commands for website.
+     * Used with command factory to create a basis for all commands to execute and run.
+     * @param request Used to grab POST info.
+     * @param response Used to create cookies and status of request.
+     * @return String of webpage to redirect to.
+     */
     public String execute(HttpServletRequest request, HttpServletResponse response);
 }

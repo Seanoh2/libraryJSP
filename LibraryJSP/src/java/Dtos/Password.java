@@ -4,7 +4,7 @@ import org.mindrot.BCrypt;
 
 public class Password {
     
-  	// Define the BCrypt workload to use when generating password hashes. 10-31 is a valid value.
+  	// Define the BCrypt workload to use when generating password hashes.
 	private static int workload = 11;
 
 	/**
@@ -12,7 +12,6 @@ public class Password {
 	 * suitable for storing in a database. It will be an OpenBSD-style crypt(3) formatted
 	 * hash string of length=60
 	 * The bcrypt workload is specified in the above static variable, a value from 10 to 31.
-	 * A workload of 12 is a very reasonable safe default as of 2013.
 	 * This automatically handles secure 128-bit salt generation and storage within the hash.
 	 * @param password_plaintext The account's plaintext password as provided during account creation,
 	 *			     or when changing an account's password.

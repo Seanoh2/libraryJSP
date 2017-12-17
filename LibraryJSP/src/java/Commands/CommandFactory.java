@@ -17,6 +17,10 @@ public class CommandFactory {
         
     }
     
+    /**
+     *
+     * @return
+     */
     public static CommandFactory getInstance(){
         
         if(currentInstance == null){
@@ -30,6 +34,11 @@ public class CommandFactory {
         return currentInstance;
     }
     
+    /**
+     *
+     * @param action
+     * @return
+     */
     public static Command createCommand(String action){
         // Create a command object to hold what we action we wish to take
         Command command = null;

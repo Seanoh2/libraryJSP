@@ -14,15 +14,21 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.security.MessageDigest;
 
 /**
  *
- * @author Sami
+ * @author Sean
  * @version 1.0
  * @since 14/10/17
  */
 public class UserDAO extends DAO implements UserDAOInterface {
 
+    /**
+     * Used to create connection to database to manipulate information.
+     *
+     * @param databaseName Used to identify what database to connect to.
+     */
     public UserDAO(String databaseName) {
         super(databaseName);
     }
@@ -203,7 +209,6 @@ public class UserDAO extends DAO implements UserDAOInterface {
         PreparedStatement ps = null;
         int rs = 0;
         Boolean result = null;
-        
 
         try {
             String hashedPassword = Password.hashString(u.getPassword());
@@ -267,17 +272,15 @@ public class UserDAO extends DAO implements UserDAOInterface {
         PreparedStatement ps = null;
         ResultSet rs = null;
         User u = null;
-        try 
-        {
+        try {
             con = this.getConnection();
-            
+
             String query = "SELECT * FROM users WHERE email = ?";
             ps = con.prepareStatement(query);
             ps.setString(1, email);
-            
+
             rs = ps.executeQuery();
-            if (rs.next() && Password.checkPassword(password, rs.getString("password")) ) 
-            {
+            if (rs.next() && Password.checkPassword(password, rs.getString("password"))) {
                 u = new User();
                 u.setUserID(rs.getInt("userID"));
                 u.setEmail(rs.getString("email"));
@@ -290,31 +293,21 @@ public class UserDAO extends DAO implements UserDAOInterface {
                 u.setUserID(rs.getInt("userID"));
                 u.setIsAdmin(rs.getInt("isAdmin"));
             }
-        } 
-        catch (SQLException e) 
-        {
+        } catch (SQLException e) {
             System.err.println("\tA problem occurred during the login method:");
-            System.err.println("\t"+e.getMessage());
-        } 
-        finally 
-        {
-            try 
-            {
-                if (rs != null) 
-                {
+            System.err.println("\t" + e.getMessage());
+        } finally {
+            try {
+                if (rs != null) {
                     rs.close();
                 }
-                if (ps != null) 
-                {
+                if (ps != null) {
                     ps.close();
                 }
-                if (con != null) 
-                {
+                if (con != null) {
                     freeConnection(con);
                 }
-            } 
-            catch (SQLException e) 
-            {
+            } catch (SQLException e) {
                 System.err.println("A problem occurred when closing down the login method:\n" + e.getMessage());
             }
         }
@@ -427,6 +420,13 @@ public class UserDAO extends DAO implements UserDAOInterface {
 
     }
     
+    /**
+     * Used to update users personal information.
+     *
+     * @param attemptUpdate what user needs information updated.
+     * @return boolean result to if it was successful.
+     */
+
     @Override
     public boolean updateUser(User attemptUpdate) {
         Connection conn = null;
@@ -495,13 +495,21 @@ public class UserDAO extends DAO implements UserDAOInterface {
 
         return result;
     }
-    
+
+    /**
+     * Used to update a users password once request has been validated. Password
+     * is hashed than added to ensure security.
+     *
+     * @param password Users new password.
+     * @param user Used to identify what user needs password need updating.
+     * @return boolean of whether result was complete or not.
+     */
     public boolean updatePassword(String password, User user) {
         Connection conn = null;
         PreparedStatement ps = null;
         EmailDAO emailDao = new EmailDAO("librarydatabase");
         int rs = 0;
-        Boolean result = null;
+        Boolean result = false;
 
         try {
             conn = getConnection();
@@ -541,7 +549,7 @@ public class UserDAO extends DAO implements UserDAOInterface {
                     freeConnection(conn);
                 }
             } catch (SQLException e) {
-                System.out.println("Exception occured in the finally section in the updateUser() method");
+                System.out.println("Exception occured in the finally section in the updatePassword() method");
             }
         }
 
@@ -553,6 +561,6 @@ public class UserDAO extends DAO implements UserDAOInterface {
         }
 
         return result;
-        
+
     }
 }

@@ -72,7 +72,7 @@ public interface UserDAOInterface {
      * This will be used to update a users information.
      * Password will be done through another system as this current method would be insecure.
      * @param user used to identify and import user information.
-     * @return 
+     * @return boolean result to if it was successful. 
      */
     public boolean updateUser(User user);
 }

@@ -17,6 +17,16 @@ import javax.servlet.http.HttpSession;
  */
 public class SignUpUserCommand implements Command {
 
+    /**
+     * Used to allow a user to register into the database.
+     * All information is check to be valid or email isn't used already.
+     * If valid, password is hashed and added to DB.
+     * Otherwise, user is redirected to error with error message.
+     *
+     * @param request Used to grab POST data and information of session.
+     * @param response Not used in the method but can be used to set cookies.
+     * @return String of webpage to redirect to.
+     */
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) {
         String forwardToJsp = "";

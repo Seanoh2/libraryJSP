@@ -18,6 +18,15 @@ import javax.servlet.http.HttpSession;
  */
 public class ViewAllTitlesCommand implements Command {
 
+    /**
+     * Used to grab all titles from database into an arrayList.
+     * If successful, session variable is created with info.
+     * Otherwise, User is redirected to error.jsp with error message.
+     *
+     * @param request Used to grab POST data and information of session.
+     * @param response Not used in the method but can be used to set cookies.
+     * @return String of webpage to redirect to.
+     */
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) {
         String forwardToJsp = "";

@@ -17,6 +17,16 @@ import javax.servlet.http.HttpSession;
  */
 public class AddTitleCommand implements Command {
 
+    /**
+     * Used to add a title into the database.
+     * Returns a String which is a link to another page, 
+     * Error.jsp for errors and myHome.jsp when complete.
+     * 
+     * 
+     * @param request Used to grab POST data and information of session.
+     * @param response Not used in the method but can be used to set cookies.
+     * @return String of webpage to redirect to.
+     */
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) {
         String forwardToJsp = "";
@@ -33,6 +43,8 @@ public class AddTitleCommand implements Command {
                 if (description != null && !author.isEmpty()) {
                     Title newTitle = new Title(name, author, 0, 0, description);
                     titleDao.addTitle(newTitle);
+                    session.setAttribute("message", "Title added to database.");
+                    forwardToJsp = "myHome.jsp";
                 } else {
                     String errorMessage = "No description supplied";
                     session.setAttribute("errorMessage", errorMessage);

@@ -18,6 +18,15 @@ import javax.servlet.http.HttpSession;
  */
 public class NovelByAuthorCommand implements Command {
 
+    /**
+     * Used to check database for title by author.
+     * An arraylist is set in session to show results, redirected to home if any results found.
+     * Otherwise, redirected to error.jsp with error message.
+     *
+     * @param request Used to grab POST data and information of session.
+     * @param response Not used in the method but can be used to set cookies.
+     * @return String of webpage to redirect to.
+     */
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) {
         String forwardToJsp = "";

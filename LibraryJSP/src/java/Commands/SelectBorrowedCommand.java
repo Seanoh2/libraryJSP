@@ -20,6 +20,16 @@ import javax.servlet.http.HttpSession;
  */
 public class SelectBorrowedCommand implements Command {
 
+    /**
+     * Used to allow user to borrow title from database, allowing the user to
+     * view title. If valid, information is saved on DB with title stock and
+     * onloan changed to reflect this. Otherwise, User is redirected to
+     * error.jsp with error message.
+     *
+     * @param request Used to grab POST data and information of session.
+     * @param response Not used in the method but can be used to set cookies.
+     * @return String of webpage to redirect to.
+     */
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) {
         String forwardToJsp = "";

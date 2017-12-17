@@ -15,6 +15,14 @@ import javax.servlet.http.HttpSession;
  */
 public class NoActionSuppliedCommand implements Command {
 
+    /**
+     * Used for when action variable is not found.
+     * User is redirected to error when this happens.
+     *
+     * @param request Used to grab POST data and information of session.
+     * @param response Not used in the method but can be used to set cookies.
+     * @return String of webpage to redirect to.
+     */
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) {
         // There was no action to be taken, so set the page to be viewed to the error page

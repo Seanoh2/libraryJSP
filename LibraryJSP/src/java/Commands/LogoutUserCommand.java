@@ -15,6 +15,15 @@ import javax.servlet.http.HttpSession;
  */
 public class LogoutUserCommand implements Command {
 
+    /**
+     * Simple command to logout user.
+     * Session variable for user is removed and user is redirected to login.
+     * 
+     * 
+     * @param request Used to grab POST data and information of session.
+     * @param response Not used in the method but can be used to set cookies.
+     * @return String of webpage to redirect to.
+     */
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) {
         String forwardToJsp = "login.jsp";

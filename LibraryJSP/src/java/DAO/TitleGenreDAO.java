@@ -21,6 +21,11 @@ import java.util.ArrayList;
  */
 public class TitleGenreDAO extends DAO implements TitleGenreDAOInterface {
 
+    /**
+     * Used to create connection to database to manipulate information.
+     *
+     * @param databaseName Used to identify what database to connect to.
+     */
     public TitleGenreDAO(String databaseName) {
         super(databaseName);
     }
