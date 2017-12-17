@@ -24,15 +24,24 @@ public class rateCommand implements Command{
         HttpSession session = request.getSession();
         
         ratingDAO ratingdao = new ratingDAO("librarydatabase");
-       
-        int titleID = Integer.parseInt(request.getParameter("titleID"));
+        
+        int titleID  = (Integer)session.getAttribute("id");
+        
         int rating = Integer.parseInt(request.getParameter("rating"));
+        
+        //Rating r1 = (Rating)session.getAttribute("r1");
+        
+        //int titleID = r1.getTitleID();
+        //int rating = r1.getRating();
+        
+        Rating r1 = new Rating(titleID, rating);
         
             if (titleID !=0){
                 if(rating != 0){
-                    Rating r1 = new Rating(titleID, rating);
                     ratingdao.addReview(r1);
+                    session.setAttribute("rating1", r1);
                     forwardToJsp = "ratingSuccess.jsp";
+                    
                 } else {
                     String errorMessage = "no rating supplied";
                     session.setAttribute("errorMessage", errorMessage);

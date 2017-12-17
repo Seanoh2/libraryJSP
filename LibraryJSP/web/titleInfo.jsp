@@ -4,6 +4,7 @@
     Author     : Sean
 --%>
 
+<%@page import="DAO.ratingDAO"%>
 <%@page import="Dtos.Title"%>
 <%@page import="DAO.TitleDAO"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -40,6 +41,17 @@
                 
             }
             
+            #rating{
+                position:absolute;
+                width:300px;
+                height:100px;
+                border-style:solid;
+                border-width:1px;
+                border-color: white;
+                margin-left:200px;
+                margin-top:400px;
+            }
+            
         </style>
     </head>
     <body>
@@ -61,6 +73,15 @@
             <% if(session.getAttribute("user") != null) { %>
             <a id="borrowLink" href="FrontController?action=borrowTitle&titleID=<%=selectedTitle.getTitleID()%>">Borrow Title</a>
             <% } %>
+        </div>
+        
+        <div id="rating">
+            <%
+                ratingDAO ratingdao = new ratingDAO("librarydatabase");
+                int id = (Integer)session.getAttribute("id");
+                double average = ratingdao.getAverageRatingByID(id);
+                out.println("Average rating: " + average);
+            %>
         </div>
     </body>
 </html>

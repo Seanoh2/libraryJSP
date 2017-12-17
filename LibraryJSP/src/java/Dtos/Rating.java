@@ -13,7 +13,7 @@ public class Rating {
     
     int ratingID;
     int titleID;
-    int rating;
+    double rating;
 
     public Rating(int ratingID, int titleID, int rating){
         this.ratingID = ratingID;
@@ -37,7 +37,7 @@ public class Rating {
         return titleID;
     }
 
-    public int getRating() {
+    public double getRating() {
         return rating;
     }
 

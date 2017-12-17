@@ -48,6 +48,13 @@
                 margin-left:100px;
             }
             
+            #rating{
+                width:200px;
+                height:20px;
+                font-size:16px;
+                margin-left:30px;
+            }
+            
             
         </style>
     </head>
@@ -59,12 +66,7 @@
             
             <form id="formRate" action="FrontController" method="post">
                 <input type="hidden" value="rate" name="action">
-                <input type="radio" name="rating" value="1"> 1 Star<br>
-                <input type="radio" name="rating" value="2"> 2 Star<br>
-                <input type="radio" name="rating" value="3"> 3 Star<br>
-                <input type="radio" name="rating" value="4"> 4 Star<br>
-                <input type="radio" name="rating" value="5"> 5 Star<br>
-                <input type="radio" name="rating" value="no"> Some other time
+                <input id="rating" type="text" name="rating" placeholder="Rating 1 - 5" required/>
                 <input id="submit" type="submit" name="submit" value="rate"/>
             </form>
         </div>

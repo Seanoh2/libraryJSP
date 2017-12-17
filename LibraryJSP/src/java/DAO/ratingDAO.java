@@ -12,6 +12,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -30,18 +31,20 @@ public class ratingDAO extends DAO implements ratingDAOInterface{
         PreparedStatement ps = null;
         ResultSet rs = null;
         Rating r1 = null;
-        ArrayList<Rating> ratings = new ArrayList();
+        ArrayList<Double> ratings = new ArrayList<>();
+
         try {
             con = getConnection();
 
             String query = "SELECT * from ratings where titleID = ?";
-            ps.setInt(1, id);
+            
             ps = con.prepareStatement(query);
+            ps.setInt(1, id);   
             rs = ps.executeQuery();
             
             while (rs.next()){
                 r1 = new Rating(rs.getInt("ratingID"), rs.getInt("titleID"), rs.getInt("rating"));
-                ratings.add(r1);
+                ratings.add(r1.getRating());
             }
         }
         
@@ -66,13 +69,15 @@ public class ratingDAO extends DAO implements ratingDAOInterface{
 
         double rating = 0;
         
-        for (int i = 0; i < ratings.size(); i++){
-            rating = rating + ratings.get(i).getRating();
+        for(int i = 0; i < ratings.size(); i++){
+            
+           rating += ratings.get(i);
         }
         
         rating = rating / ratings.size();
         
         return rating;
+        
     }
         
     @Override
@@ -87,7 +92,7 @@ public class ratingDAO extends DAO implements ratingDAOInterface{
             ps = conn.prepareStatement(query);
             ps.setInt(1, r1.getRatingID());
             ps.setInt(2, r1.getTitleID());
-            ps.setInt(3, r1.getRating());
+            ps.setDouble(3, r1.getRating());
             rs = ps.executeUpdate();
             
             if (rs > 0) {
