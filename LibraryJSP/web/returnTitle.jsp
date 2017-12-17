@@ -66,9 +66,11 @@
             
             <form id="formRate" action="FrontController" method="post">
                 <input type="hidden" value="rate" name="action">
+                <input type="hidden" value="<%=(int) session.getAttribute("titleID")%>" name="titleID">
                 <input id="rating" type="text" name="rating" placeholder="Rating 1 - 5" required/>
                 <input id="submit" type="submit" name="submit" value="rate"/>
             </form>
+                <%session.removeAttribute("titleID");%>;
         </div>
     </body>
 </html>

@@ -25,7 +25,7 @@ public class rateCommand implements Command{
         
         ratingDAO ratingdao = new ratingDAO("librarydatabase");
         
-        int titleID  = (Integer)session.getAttribute("id");
+        int titleID  = Integer.parseInt(request.getParameter("titleID"));
         
         int rating = Integer.parseInt(request.getParameter("rating"));
         
@@ -39,8 +39,8 @@ public class rateCommand implements Command{
             if (titleID !=0){
                 if(rating != 0){
                     ratingdao.addReview(r1);
-                    session.setAttribute("rating1", r1);
-                    forwardToJsp = "ratingSuccess.jsp";
+                    session.setAttribute("message", "Thank you for your review");
+                    forwardToJsp = "myHome.jsp";
                     
                 } else {
                     String errorMessage = "no rating supplied";

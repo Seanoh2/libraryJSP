@@ -78,8 +78,8 @@
         <div id="rating">
             <%
                 ratingDAO ratingdao = new ratingDAO("librarydatabase");
-                int id = (Integer)session.getAttribute("id");
-                double average = ratingdao.getAverageRatingByID(id);
+                double average = ratingdao.getAverageRatingByID(titleID);
+                session.setAttribute("titleID", titleID);
                 out.println("Average rating: " + average);
             %>
         </div>
