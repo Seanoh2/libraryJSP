@@ -57,7 +57,7 @@
                     <td><%=b.getTitle().getNovelName()%></td>
                     <td><%=b.getTitle().getTitleDescription()%></td>
                     <td><%=b.getDaysBorrowed()%></td>
-                <td><a href="returnTitle.jsp?borrowedID=<%=b.getBorrowedID()%>">Return</a></td>
+                <td><a href="checkReturn.jsp?borrowedID=<%=b.getBorrowedID()%>">Return</a></td>
                 
                 </tr>
                 

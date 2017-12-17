@@ -65,6 +65,10 @@ public class CommandFactory {
                     command = new SelectBorrowedCommand();
                     break;
                     
+                case "returnborrowed":
+                    command = new ReturnBorrowedCommand();
+                    break;
+                    
                 case "novelByName":
                     command = new NovelByNameCommand();
                     break;
@@ -112,6 +116,7 @@ public class CommandFactory {
                 case "resetpassword":
                     command = new ResetPasswordCommand();
                     break;
+                    
                     
                 case "rate":
                     command = new rateCommand();

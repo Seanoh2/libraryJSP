@@ -13,7 +13,11 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
+import java.util.Locale;
 
 /**
  *
@@ -446,9 +450,9 @@ public class BorrowedDAO extends DAO implements BorrowedDAOInterface {
 
     /**
      * Used to check if a title is already borrowed by the user. This is done to
-     * ensure the user cannot borrow the title twice or more.
-     * If borrowed found, borrowed is returned with information.
-     * Otherwise, Borrowed is returned with null.
+     * ensure the user cannot borrow the title twice or more. If borrowed found,
+     * borrowed is returned with information. Otherwise, Borrowed is returned
+     * with null.
      *
      * @param request Used to grab POST data and information of session.
      * @param response Not used in the method but can be used to set cookies.
@@ -502,6 +506,16 @@ public class BorrowedDAO extends DAO implements BorrowedDAOInterface {
         }
 
         return borrowed;
+    }
+
+    public double checkDays(String checkOverdue) {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy", Locale.ENGLISH);
+        LocalDate dateBorrowed = LocalDate.parse(checkOverdue, formatter);
+        String timeNow = LocalDate.now().format(formatter);
+        LocalDate dateNow = LocalDate.parse(timeNow, formatter);
+        long daysBetween = ChronoUnit.DAYS.between(dateBorrowed, dateNow);
+        
+        return daysBetween;
     }
 
 }
